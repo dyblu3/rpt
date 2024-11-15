@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .container {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .container input {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .output {
+            white-space: pre;
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:active {
+            background-color: #3e8e41;
+        }
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 100%;
+            }
+            .button-container {
+                position: static;
+                margin-top: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Input Form</h1>
+    <div class="container">
+        <label for="asiaRitelJatinegara">Asia Ritel RX Jatinegara (dBm):</label>
+        <input type="number" id="asiaRitelJatinegara" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="ujbKarawangJatinegara">UJB Karawang RX Jatinegara (dBm):</label>
+        <input type="number" id="ujbKarawangJatinegara" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="asiaRitelCikarang">Asia Ritel RX Cikarang (dBm):</label>
+        <input type="number" id="asiaRitelCikarang" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="ujbKarawangCikarang">UJB Karawang RX Cikarang (dBm):</label>
+        <input type="number" id="ujbKarawangCikarang" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="twtaPrimary1">TWTA Primary 1 (W):</label>
+        <input type="number" id="twtaPrimary1" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="twtaPrimary2">TWTA Primary 2 (W):</label>
+        <input type="number" id="twtaPrimary2" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="beaconLevelPrimary">Beacon Level Primary (dB):</label>
+        <input type="number" id="beaconLevelPrimary" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="twtaSecondary1">TWTA Secondary 1 (W):</label>
+        <input type="number" id="twtaSecondary1" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="twtaSecondary2">TWTA Secondary 2 (W):</label>
+        <input type="number" id="twtaSecondary2" placeholder="Enter value">
+    </div>
+    <div class="container">
+        <label for="beaconLevelSecondary">Beacon Level Secondary (dB):</label>
+        <input type="number" id="beaconLevelSecondary" placeholder="Enter value">
+    </div>
+    <!-- Lengkap dengan input yang hilang -->
+    <div class="button-container">
+        <button onclick="generateOutput()">Generate Output</button>
+        <button onclick="copyOutput()">Copy</button>
+        <button onclick="clearOutput()">Clear</button>
+        <button onclick="exitPage()">Exit</button>
+    </div>
+
+    <h2>Output</h2>
+    <div class="output" id="output"></div>
+
+    <script>
+        function generateOutput() {
+            let asiaRitelJatinegara = document.getElementById('asiaRitelJatinegara').value || 'xxx';
+            let ujbKarawangJatinegara = document.getElementById('ujbKarawangJatinegara').value || 'xxx';
+            let asiaRitelCikarang = document.getElementById('asiaRitelCikarang').value || 'xxx';
+            let ujbKarawangCikarang = document.getElementById('ujbKarawangCikarang').value || 'xxx';
+            let twtaPrimary1 = document.getElementById('twtaPrimary1').value || 'xxx';
+            let twtaPrimary2 = document.getElementById('twtaPrimary2').value || 'xxx';
+            let beaconLevelPrimary = document.getElementById('beaconLevelPrimary').value || 'xxx';
+            let twtaSecondary1 = document.getElementById('twtaSecondary1').value || 'xxx';
+            let twtaSecondary2 = document.getElementById('twtaSecondary2').value || 'xxx';
+            let beaconLevelSecondary = document.getElementById('beaconLevelSecondary').value || 'xxx';
+
+            let output = `
+     DARK FIBER
+
+RX Jatinegara
+Asia Ritel   : ${asiaRitelJatinegara} dBm 
+UJB Karawang : ${ujbKarawangJatinegara} dBm 
+
+RX Cikarang
+Asia Ritel   : ${asiaRitelCikarang} dBm 
+UJB Karawang : ${ujbKarawangCikarang} dBm
+
+----------------------------------------
+       TWTA PRIMARY
+${twtaPrimary1} W
+${twtaPrimary2} W
+
+       PRIMARY [RHCP, LH
+CP, Backup]
+BDC : ON, ON, OFF
+BUC : ON, ON, OFF
+LNA : ON, ON, OFF
+
+     BEACON LEVEL PRIMARY
+${beaconLevelPrimary} dB
+
+----------------------------------------
+     TWTA SECONDARY
+${twtaSecondary1} W
+${twtaSecondary2} W
+
+       SECONDARY [RHCP, LHCP, Backup]
+BDC : ON, ON, OFF
+BUC : ON, ON, OFF
+LNA : ON, ON, OFF
+
+     BEACON LEVEL SECONDARY
+${beaconLevelSecondary} dB
+
+----------------------------------------
+Outroute Capacity LC1 : OK
+Inroute Capacity LC1 : OK
+Inroute & Outroute Capacity LC2 (DUPLICATE) : OK
+MXM : OK
+            `;
+
+            document.getElementById('output').textContent = output;
+        }
+
+        function copyOutput() {
+            let outputDiv = document.getElementById('output');
+            let range = document.createRange();
+            range.selectNode(outputDiv);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert("Output copied to clipboard!");
+        }
+
+        function clearOutput() {
+            document.getElementById('output').textContent = '';
+            let inputs = document.querySelectorAll('input');
+            inputs.forEach(input => input.value = '');
+        }
+
+        function exitPage() {
+            if (confirm("Are you sure you want to exit?")) {
+                window.close();
+            }
+        }
+    </script>
+</body>
+</html>
